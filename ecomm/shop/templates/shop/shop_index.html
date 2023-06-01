@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+{% block head %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+</head>
+{% endblock head %}
+
+<br>
+    <div class="container">
+        <h2>Welcome to Nebula Mart!</h2>
+        <br>
+        <h5>Here are your product(s)</h5>
+        <br>
+    </div>
+
+    {% block shop_content %}
+
+    {% endblock shop_content %}
+
+{% endblock content %}
+
+
