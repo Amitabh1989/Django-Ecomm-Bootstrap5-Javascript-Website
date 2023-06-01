@@ -1,0 +1,59 @@
+{% extends 'shop_index.html' %}
+{% load static %}
+
+{% block shop_content %}
+{% comment %} {% load django_bootstrap_pagination %} {% endcomment %}
+<div class="container">
+    <div class="container">
+        <div class="row">
+            {% for p in product_list %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{p.image}}" alt="{{p.title}}" class="card-img-top" style="width: 300px; height: 200px;">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <a href="/shop/product_detail/{{p.pk}}">{{p}}</a>
+                            </div>
+                            <div class="card-text">
+                                    <del style="color: grey;">Original Price : INR {{p.price}}</del>
+                                    <br>
+                                    Discounted Price : INR {{p.discounted_price}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- PAGINATION -->
+
+<!-- PAGINATION -->
+<hr>
+<div class="row">
+    <div class="col-md-3 offset-md-4">
+        <ul class="pagination">
+            <h5>Pages : &ensp;</h5>
+            {% if product_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ product_list.previous_page_number }}">Current</a>
+                </li>
+            {% endif %}
+                
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ product_list.number }}">{{ product_list.number }}</a>
+            </li>
+
+            {% if product_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ product_list.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+{% endblock shop_content %}
+
+

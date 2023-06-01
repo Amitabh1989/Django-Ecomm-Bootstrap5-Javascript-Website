@@ -1,0 +1,17 @@
+body{
+    background-color: gainsboro;
+}
+
+.card-text {
+    color: green;
+    font-weight: 800;
+}
+
+.card-title {
+    font-weight: 900;
+}
+
+.strike-through {
+    text-decoration: line-through;
+    color: grey; /* Replace with your desired color */
+}
