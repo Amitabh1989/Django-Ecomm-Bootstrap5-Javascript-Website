@@ -39,11 +39,8 @@ $(document).ready(function() {
             cart_index += 1;
         }
         cartString += "<br>"
-        //cartString += "<a href='/shop/checkout' class='btn btn-warning' id='checkout'>Checkout</a>";
-        // cartString += "<a href='{% url 'shop:checkout' %}' class='btn btn-warning' id='checkout'>Checkout</a>";
         cartString += "<a href='" + checkoutUrl + "' class='btn btn-warning' id='checkout'>Checkout</a>";
         console.log("cartString is : " + cartString);
-        // document.getElementById("cart").setAttribute('data-content', cartString)
         
         var element = document.getElementById("cart");
         console.log("Element is : " + element); // Print the element to the console

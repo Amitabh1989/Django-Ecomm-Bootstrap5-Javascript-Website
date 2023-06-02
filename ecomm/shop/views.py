@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from shop.models import Product
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from shop.models import Product, Order
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -40,8 +40,42 @@ class ProductDetailView(DetailView):
     #         queryset = queryset.filter(description__icontains=query)
     #     return queryset
 
+# class CheckOutView(TemplateView):
 class CheckOutView(TemplateView):
     # template_name = reverse_lazy("shop:checkout")
     template_name = 'checkout.html'
-    # def get_template_names(self):
-        # return [reverse_lazy("shop:checkout")]
+    
+    def post(self, request, *args, **kwargs):
+        print(f"I got here : {request}")
+        # Retrieve the form data
+        name = request.POST.get('name', "")
+        email = request.POST.get('email', "")
+        state = request.POST.get('state', "")
+        zipcode = request.POST.get('zipcode', "213")
+        city = request.POST.get('city', "")
+        address = request.POST.get('address', "")
+        items = request.POST.get('items', "")
+
+
+        # Debug statements
+        print("Name:", name)
+        print("Email:", email)
+        print("State:", state)
+        print("Zipcode:", zipcode)
+        print("City:", city)
+        print("Address:", address)
+        print("Items:", items)
+        # Process the form data
+        # ... perform any necessary operations with the data
+        order = Order(name=name, email=email, address=address, zipcode=zipcode, city=city, state=state, items=items)
+        order.save()
+
+        # Redirect to a success page or render a template
+        # Generate the URL for the success page
+        success_url = reverse_lazy('shop:success')  # Replace 'success-page' with the actual URL name or path
+
+        # Redirect to the success page
+        return redirect(success_url)
+
+class SuccessPageView(TemplateView):
+    template_name = 'success.html'  # Replace 'success.html' with the template for your success page
