@@ -16,3 +16,19 @@ class Product(models.Model):
     class Meta:
         ordering = ['image', 'category', 'title',
                     'description', 'price', 'discounted_price']
+
+class Order(models.Model):
+    print("Got into models. py and trying to save the world")
+    items = models.CharField(max_length=1000)
+    print(f"Got into models. py and trying to save the world : {items}")
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    zipcode = models.CharField(max_length=20)
+    address = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = [
+            "name", "email", "address", "city", "zipcode", "state", "items"
+        ]

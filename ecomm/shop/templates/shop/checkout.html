@@ -20,38 +20,39 @@
 
     <div class="row">
         <div class='col-md-12'>
+            <form class="row g-3" method="POST">
+                {% csrf_token %}
 
-            <form class="row g-3">
+                <input id="items" name="items" type="hidden" class="form-control">
+
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="inputEmail4" placeholder="John">
+                  <input id="name" name= "name" type="text" class="form-control" placeholder="John">
                 </div>
+
                 <div class="col-md-6">
                   <label for="inputPassword4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputPassword4">
+                  <input id="email" name="email" type="email" class="form-control">
                 </div>
+
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                  <input id="address" name="address" type="text" class="form-control" placeholder="1234 Main St">
                 </div>
-                <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
+
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity">
+                  <input id="city" name="city" type="text" class="form-control">
                 </div>
+
                 <div class="col-md-4">
                   <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
+                  <input id="state" name="state" type="text" class="form-control">
                 </div>
+
                 <div class="col-md-2">
                   <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
+                  <input id="zipcode" name="zipcode" type="text" class="form-control">
                 </div>
                 
                 <div class="col-12">
@@ -66,7 +67,7 @@
 
 </div>
 
-<script>
+{% comment %} <script>
     // JavaScript to get the cart items from local storage
     if (localStorage.getItem('cart') == null) {
         var cart = {};
@@ -82,5 +83,49 @@
         var itemString = '<li class="list-group-item">' + name + '-' + '<span class="text-danger" style="color: red;">' + quantity + '</span>' + '</li>';
         $("#item_list").append(itemString);
     }
+    $("#items").val(JSON.stringify(cart));
+    console.log("Cart at checkout : " + JSON.stringify(cart))
+</script> {% endcomment %}
+
+
+<script>
+    // Move the JavaScript code inside a function
+    function populateFormItems() {
+        // JavaScript to get the cart items from local storage
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+
+        console.log("cart items are: ", cart);
+        for (var item in cart) {
+            let name = cart[item][1].trim(); // Trim the leading and trailing whitespaces
+            let quantity = cart[item][0];
+
+            var itemString = '<li class="list-group-item">' + name + '-' + '<span class="text-danger" style="color: red;">' + quantity + '</span>' + '</li>';
+            $("#item_list").append(itemString);
+        }
+        $("#items").val(JSON.stringify(cart));
+        console.log("Cart at checkout : " + JSON.stringify(cart))
+    }
+
+    var formSubmitted = false;
+
+    // Call the function on page load
+    $(document).ready(function() {
+        populateFormItems();
+
+        // Check if the form is already submitted
+        if (!formSubmitted) {
+            $("form").submit(function() {
+                formSubmitted = true;
+                populateFormItems();
+            });
+        }
+    });
 </script>
+
+
+
 {% endblock shop_content %}
