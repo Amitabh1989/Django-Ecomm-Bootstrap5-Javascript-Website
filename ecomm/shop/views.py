@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from shop.models import Product
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
 from django.db.models import Q
 from django.core.paginator import Paginator
 # Create your views here.
@@ -39,3 +39,9 @@ class ProductDetailView(DetailView):
     #     if query:
     #         queryset = queryset.filter(description__icontains=query)
     #     return queryset
+
+class CheckOutView(TemplateView):
+    # template_name = reverse_lazy("shop:checkout")
+    template_name = 'checkout.html'
+    # def get_template_names(self):
+        # return [reverse_lazy("shop:checkout")]

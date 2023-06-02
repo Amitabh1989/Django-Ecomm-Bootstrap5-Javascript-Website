@@ -6,7 +6,7 @@
 {% block head %}
 {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 {% endblock head %}
@@ -26,46 +26,76 @@
     <!-- 
         JQuery for Add to cart Functionality
     -->
-    <script type="text/javascript">
-        console.log("Amitabh's 1st Java Script")
-        if(localStorage.getItem('cart')==null){
+    <!-- <script type="text/javascript">
+        console.log("Amitabh's 1st JavaScript");
+        if (localStorage.getItem('cart') == null) {
             var cart = {};
-        }
-        else{
+        } else {
             cart = JSON.parse(localStorage.getItem('cart'));
         }
+        
         $(document).ready(function() {
-            $(document).on('click', '.atc', function(){
-                console.log("The add to cart button is clicked")
-                {% comment %} Extracting the button from the button click {% endcomment %}
+            $(document).on('click', '.atc', function() {
+                console.log("The add to cart button is clicked");
                 var item_id = this.id.toString();
                 console.log(item_id);
                 
-                if(cart[item_id] != undefined){
-                    cart[item_id] = cart[item_id] + 1;
+                if (cart[item_id] != undefined) {
+                    quantity = cart[item_id][0] + 1;
+                    cart[item_id][0] = quantity;
+                } else {
+                    quantity = 1;
+                    name = document.getElementById("as"+item_id).innerHTML.trim();
+                    cart[item_id] = [quantity, name];
                 }
-                else{
-                    cart[item_id] = 1;
-                }
-                console.log(cart)
+                console.log(cart);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length +")";
-            })});
-
-            {% comment %} enable pop over text of the cart {% endcomment %}
-            {% comment %} const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-            const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl)) {% endcomment %}
-
-            $(document).ready(function() {
-                $('[data-toggle="popover"]').popover({
-                    html: true
-                });
-                {% comment %} document.getElementById("cart").setAttribute('data-content', '<h5>Your cart</h5>') {% endcomment %}
-              
-                document.getElementById("cart").innerHTML = <h5>Your cart</h5>
+                document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
+            });
+    
+            {% comment %} $('[data-toggle="popover"]').popover({
+                html: true,
+                content: '<h5>Your cart</h5>'
+            }); {% endcomment %}
+            
+            $('#cart').on('click', function () {
+                $(this).popover('show');
             });
             
-    </script>
+            // DisplayCart(cart);
+            function DisplayCart(cart) {
+                var cartString = "";
+                cartString += "<h5>Cart Details</h5><br>"
+                var cart_index = 1;
+                for(var x in cart) {
+                    cartString += cart_index + document.getElementById("as" + x).innerHTML.trim() + ". Qty : " + cart[x][0] + "<br>";
+                    cart_index += 1;
+                }
+                cartString += "<br>"
+                //cartString += "<a href='/shop/checkout' class='btn btn-warning' id='checkout'>Checkout</a>";
+                cartString += "<a href='{% url 'shop:checkout' %}' class='btn btn-warning' id='checkout'>Checkout</a>";
+                console.log("cartString is : " + cartString);
+                // document.getElementById("cart").setAttribute('data-content', cartString)
+                
+                var element = document.getElementById("cart");
+                console.log("Element is : " + element); // Print the element to the console
+
+                // Check if the element is null or undefined
+                if (element) {
+                    element.setAttribute('data-content', cartString);
+                } else {
+                    console.log("Element not found"); // Handle the case when the element is not found
+                }
+
+                $('[data-toggle="popover"]').popover({
+                    html: true,
+                    content: cartString
+                });
+            }
+            DisplayCart(cart);
+        });
+            
+    </script> -->
 {% endblock content %}
 
 

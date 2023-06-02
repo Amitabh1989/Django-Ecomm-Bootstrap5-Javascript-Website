@@ -1,0 +1,86 @@
+{% extends 'shop_index.html' %}
+
+{% block shop_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Checkout the items now</h4>
+        </div>
+        <div>
+            <ul class="list-group" id="item_list">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="badge badge-primary badge-pill" align="center">
+                        <span id="item_quantity" class="text-danger" style="color: red !important;">14</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class='col-md-12'>
+
+            <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="inputEmail4" placeholder="John">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputPassword4">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">State</label>
+                  <select id="inputState" class="form-select">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputZip" class="form-label">Zip</label>
+                  <input type="text" class="form-control" id="inputZip">
+                </div>
+                
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Place Order</button>
+                </div>
+              </form>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    // JavaScript to get the cart items from local storage
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+
+    console.log("cart items are: ", cart);
+    for (var item in cart) {
+        let name = cart[item][1].trim(); // Trim the leading and trailing whitespaces
+        let quantity = cart[item][0];
+
+        var itemString = '<li class="list-group-item">' + name + '-' + '<span class="text-danger" style="color: red;">' + quantity + '</span>' + '</li>';
+        $("#item_list").append(itemString);
+    }
+</script>
+{% endblock shop_content %}

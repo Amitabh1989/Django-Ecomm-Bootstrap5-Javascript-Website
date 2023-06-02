@@ -29,11 +29,11 @@
               </li>
               
               <li class="nav-item">
-                <button id="cart" data-html="true" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+                <button id="cart" data-html="true" data-toggle="popover" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
                   Cart(0)
                 </button>
-                {% comment %} <a id="cart" class="nav-link active" href="#">Cart(0)</a> {% endcomment %}
               </li>
+              
 
               <li class="nav-item">
                 {% comment %} <a class="nav-link" href="{% url 'cars:delete' %}">Delete</a> {% endcomment %}
@@ -55,7 +55,7 @@
     {% endblock content %}
   
     <hr>
-    <img src="{% static 'shadow/nebula.png' %}" alt="Nebula" height='100px' width='100px'>
+    <img src="{% static 'shop/nebula.png' %}" alt="Nebula" height='100px' width='100px'>
 
 </body>
 </html>
