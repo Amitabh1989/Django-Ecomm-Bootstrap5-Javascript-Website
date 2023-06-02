@@ -7,6 +7,7 @@
 {% load static %}
 <head>
     <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 {% endblock head %}
 
@@ -22,6 +23,49 @@
 
     {% endblock shop_content %}
 
+    <!-- 
+        JQuery for Add to cart Functionality
+    -->
+    <script type="text/javascript">
+        console.log("Amitabh's 1st Java Script")
+        if(localStorage.getItem('cart')==null){
+            var cart = {};
+        }
+        else{
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        $(document).ready(function() {
+            $(document).on('click', '.atc', function(){
+                console.log("The add to cart button is clicked")
+                {% comment %} Extracting the button from the button click {% endcomment %}
+                var item_id = this.id.toString();
+                console.log(item_id);
+                
+                if(cart[item_id] != undefined){
+                    cart[item_id] = cart[item_id] + 1;
+                }
+                else{
+                    cart[item_id] = 1;
+                }
+                console.log(cart)
+                localStorage.setItem('cart', JSON.stringify(cart));
+                document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length +")";
+            })});
+
+            {% comment %} enable pop over text of the cart {% endcomment %}
+            {% comment %} const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+            const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl)) {% endcomment %}
+
+            $(document).ready(function() {
+                $('[data-toggle="popover"]').popover({
+                    html: true
+                });
+                {% comment %} document.getElementById("cart").setAttribute('data-content', '<h5>Your cart</h5>') {% endcomment %}
+              
+                document.getElementById("cart").innerHTML = <h5>Your cart</h5>
+            });
+            
+    </script>
 {% endblock content %}
 
 

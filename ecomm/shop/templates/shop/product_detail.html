@@ -2,9 +2,28 @@
 {% load static %}
 {% block shop_content %}
 
-<div class="container">
-    <img src="{{product.image}}" alt="">
-    <h3>{{product}}</h3>
+<div class="container text-center">
+
+    <div class="row">
+        <div class="col-6">
+            <h3>{{product.title}}</h3>
+        </div>
+        <div class="col">
+            <img src="{{product.image}}" alt="">
+        </div>
+        <div class="col">
+            <h3>{{product.title}}</h3>
+            <br>
+            <h5>Description : </h5>{{product.description}}
+            <br>
+            <br>
+            <h5>Price : {{product.price}}</h5>
+        </div>
+      </div>
+
+
+    {% comment %} <img src="{{product.image}}" alt="">
+    <h3>{{product}}</h3> {% endcomment %}
 </div>
 
 {% endblock shop_content %}
