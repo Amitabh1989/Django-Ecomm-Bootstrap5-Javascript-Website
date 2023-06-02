@@ -12,12 +12,15 @@
                         <img src="{{p.image}}" alt="{{p.title}}" class="card-img-top" style="width: 300px; height: 200px;">
                         <div class="card-body">
                             <div class="card-title">
-                                <a href="/shop/product_detail/{{p.pk}}">{{p}}</a>
+                                {% comment %} <a href="/shop/product_detail/{{p.pk}}">{{p}}</a> {% endcomment %}
+                                {{p.title}}
                             </div>
                             <div class="card-text">
                                     <del style="color: grey;">Original Price : INR {{p.price}}</del>
                                     <br>
                                     Discounted Price : INR {{p.discounted_price}}
+                                    <a href="/shop/product_detail/{{p.pk}}"><button class="btn btn-warning">View</button></a>
+                                    <button id="{{p.id}}" class="btn atc btn-warning">Add to cart</button>
                             </div>
                         </div>
                     </div>
