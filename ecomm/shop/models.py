@@ -33,3 +33,6 @@ class Order(models.Model):
         ordering = [
             "name", "email", "address", "city", "zipcode", "state", "items", "totalPrice"
         ]
+    
+    def __str__(self) -> str:
+        return f'{self.items}'
