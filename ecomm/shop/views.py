@@ -55,6 +55,7 @@ class CheckOutView(TemplateView):
         city = request.POST.get('city', "")
         address = request.POST.get('address', "")
         items = request.POST.get('items', "")
+        totalPrice = request.POST.get('totalPrice', "")
 
 
         # Debug statements
@@ -65,9 +66,10 @@ class CheckOutView(TemplateView):
         print("City:", city)
         print("Address:", address)
         print("Items:", items)
+        print("TotalPrice:", totalPrice)
         # Process the form data
         # ... perform any necessary operations with the data
-        order = Order(name=name, email=email, address=address, zipcode=zipcode, city=city, state=state, items=items)
+        order = Order(name=name, email=email, address=address, zipcode=zipcode, city=city, state=state, items=items, totalPrice=totalPrice)
         order.save()
 
         # Redirect to a success page or render a template

@@ -37,20 +37,29 @@ $(document).ready(function() {
         $(this).popover('show');
     });
     
+    // DisplayCart(cart);
     function DisplayCart(cart) {
         var cartString = "";
         cartString += "<h5>Cart Details</h5><br>"
-        // new code
-        let cartObject = JSON.parse(localStorage.getItem('cart'))
-        for(item in cartObject) {
-            cartString += cartObject[item][1] + ". Qty : " + cartObject[item][0] + "<br>";
-            // cart_index += 1;
+        var cart_index = 1;
+        for(var x in cart) {
+            cartString += cart_index + document.getElementById("as" + x).innerHTML.trim() + ". Qty : " + cart[x][0] + "<br>";
+            cart_index += 1;
         }
         cartString += "<br>"
         cartString += "<a href='" + checkoutUrl + "' class='btn btn-warning' id='checkout'>Checkout</a>";
         console.log("cartString is : " + cartString);
-        document.getElementById("cart").setAttribute('data-content', cartString);
         
+        var element = document.getElementById("cart");
+        console.log("Element is : " + element); // Print the element to the console
+
+        // Check if the element is null or undefined
+        if (element) {
+            element.setAttribute('data-content', cartString);
+        } else {
+            console.log("Element not found"); // Handle the case when the element is not found
+        }
+
         $('[data-toggle="popover"]').popover({
             html: true,
             content: cartString

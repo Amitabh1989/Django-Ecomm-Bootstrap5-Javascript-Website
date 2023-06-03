@@ -1,6 +1,9 @@
 {% extends 'shop_index.html' %}
+{% load static %}
+
 
 {% block shop_content %}
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -8,16 +11,12 @@
         </div>
         <div>
             <ul class="list-group" id="item_list">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="badge badge-primary badge-pill" align="center">
-                        <span id="item_quantity" class="text-danger" style="color: red !important;">14</span>
-                    </span>
-                </li>
+
             </ul>
         </div>
     </div>
 
-
+    <br>
     <div class="row">
         <div class='col-md-12'>
             <form class="row g-3" method="POST">
@@ -54,78 +53,20 @@
                   <label for="inputZip" class="form-label">Zip</label>
                   <input id="zipcode" name="zipcode" type="text" class="form-control">
                 </div>
+
+                <div class="col-md-2">
+                    <label for="inputPrice" class="form-label">Total Amount</label>
+                    <input readonly="" id="totalPrice" name="totalPrice" type="text" class="form-control">
+                </div>
                 
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary">Place Order</button>
                 </div>
               </form>
-
         </div>
     </div>
-
-
-
 </div>
 
-{% comment %} <script>
-    // JavaScript to get the cart items from local storage
-    if (localStorage.getItem('cart') == null) {
-        var cart = {};
-    } else {
-        cart = JSON.parse(localStorage.getItem('cart'));
-    }
-
-    console.log("cart items are: ", cart);
-    for (var item in cart) {
-        let name = cart[item][1].trim(); // Trim the leading and trailing whitespaces
-        let quantity = cart[item][0];
-
-        var itemString = '<li class="list-group-item">' + name + '-' + '<span class="text-danger" style="color: red;">' + quantity + '</span>' + '</li>';
-        $("#item_list").append(itemString);
-    }
-    $("#items").val(JSON.stringify(cart));
-    console.log("Cart at checkout : " + JSON.stringify(cart))
-</script> {% endcomment %}
-
-
-<script>
-    // Move the JavaScript code inside a function
-    function populateFormItems() {
-        // JavaScript to get the cart items from local storage
-        if (localStorage.getItem('cart') == null) {
-            var cart = {};
-        } else {
-            cart = JSON.parse(localStorage.getItem('cart'));
-        }
-
-        console.log("cart items are: ", cart);
-        for (var item in cart) {
-            let name = cart[item][1].trim(); // Trim the leading and trailing whitespaces
-            let quantity = cart[item][0];
-
-            var itemString = '<li class="list-group-item">' + name + '-' + '<span class="text-danger" style="color: red;">' + quantity + '</span>' + '</li>';
-            $("#item_list").append(itemString);
-        }
-        $("#items").val(JSON.stringify(cart));
-        console.log("Cart at checkout : " + JSON.stringify(cart))
-    }
-
-    var formSubmitted = false;
-
-    // Call the function on page load
-    $(document).ready(function() {
-        populateFormItems();
-
-        // Check if the form is already submitted
-        if (!formSubmitted) {
-            $("form").submit(function() {
-                formSubmitted = true;
-                populateFormItems();
-            });
-        }
-    });
-</script>
-
-
+<script src="{% static 'js/checkout.js' %}"></script>
 
 {% endblock shop_content %}
