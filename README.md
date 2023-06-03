@@ -22,6 +22,7 @@ Lean all about a fully functional (well, almost, not hosted)...education level p
 </p>
 
 <br>
+
 ### Screenshot 2 : Checkout Page : Fully functional cart items, total amount, address and Database interaction
 <p align="center">
     <a href="https://github.com/amitabh1989">
