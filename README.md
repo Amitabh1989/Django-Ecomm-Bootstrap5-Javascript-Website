@@ -1,4 +1,4 @@
-# Django-Ecomm-Python
+# Django based Ecomm Website with Bootstrap5 and JavaScript
 
 ## Well !
 <h3>🤔<b>How do I define DJANGO?</b>🤔</h3>
@@ -15,6 +15,19 @@ Lean all about a fully functional (well, almost, not hosted)...education level p
 ## Few screen shots from the website is as below.
 
 ### Screenshot 1 : Products page + Fully functional Cart + Fully Functional Search
+<p align="center">
+    <a href="https://github.com/amitabh1989">
+        <img src="https://github.com/Amitabh1989/Django-Ecomm-Python/blob/main/hosting_resources/ss_1.png" height="400px", width="750px" style="margin-left: 20px;">
+    </a>
+</p>
 
+<br>
 ### Screenshot 2 : Checkout Page : Fully functional cart items, total amount, address and Database interaction
+<p align="center">
+    <a href="https://github.com/amitabh1989">
+        <img src="https://github.com/Amitabh1989/Django-Ecomm-Python/blob/main/hosting_resources/ss_1.png" height="400px", width="750px" style="margin-left: 20px;">
+    </a>
+</p>
 
+
+🛒🛍️ Go shop some Apple Products -- all for free !! 😜😜
