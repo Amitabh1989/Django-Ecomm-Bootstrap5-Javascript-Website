@@ -17,7 +17,7 @@
                             <div class="card-text">
                                     <del style="color: grey;">Original Price : INR {{p.price}}</del>
                                     <br>
-                                    Discounted Price : INR {{p.discounted_price}}
+                                    Discounted Price : INR <span id="discounted-price{{p.id}}">{{p.discounted_price}}</span>
                                     <a href="/shop/product_detail/{{p.pk}}"><button class="btn btn-warning">View</button></a>
                                     <button id="{{p.id}}" class="btn atc btn-warning">Add to cart</button>
                             </div>
@@ -35,30 +35,32 @@
 <hr>
 <div class="row">
     <div class="col-md-3 offset-md-4">
+        <h5>Pages : &ensp;</h5>
         <ul class="pagination">
-            <h5>Pages : &ensp;</h5>
             {% if product_list.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{product_list.previous_page_number}}">Current</a>
+                    <a class="page-link" href="?page={{ product_list.previous_page_number }}">Current</a>
                 </li>
             {% endif %}
                 
             <li class="page-item active">
-                <a class="page-link" href="?page={{product_list.number}}">{{product_list.number}}</a>
+                <a class="page-link" href="?page={{ product_list.number }}">{{ product_list.number }}</a>
             </li>
 
             {% if product_list.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{product_list.next_page_number}}">Next</a>
+                    <a class="page-link" href="?page={{ product_list.next_page_number }}">Next</a>
                 </li>
             {% endif %}
         </ul>
     </div>
 </div>
 
+
 <script>
     var checkoutUrl = "{% url 'shop:checkout' %}";
 </script>
+
 <script src="{% static 'js/product_details.js' %}"></script>
 
 
